@@ -1,5 +1,5 @@
 IMPORT INTO AOL_SCHEMA.TIMEDIM("ID", "year", "month", "day", "hour", "minute")
-FROM LOCAL CSV FILE 'data/new_times.csv' SKIP = 1;
+FROM LOCAL CSV FILE 'data/flights/new_times.csv' SKIP = 1;
 
 CREATE OR REPLACE TABLE AOL_SCHEMA.FLIGHTS(
     CARRIER VARCHAR(2),
@@ -18,4 +18,4 @@ CREATE OR REPLACE TABLE AOL_SCHEMA.FLIGHTS(
 );
 
 IMPORT INTO AOL_SCHEMA.FLIGHTS
-FROM LOCAL CSV FILE 'data/flights.csv' SKIP = 1;
+FROM LOCAL CSV FILE 'data/flights/flights.csv' SKIP = 1;

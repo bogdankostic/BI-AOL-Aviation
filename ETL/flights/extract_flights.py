@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import Select
 start_time = time.time()
 
 # Create the directory to store the data
-download_dir = os.path.abspath("../data/raw")
+download_dir = os.path.abspath("../../data/flights/raw")
 os.makedirs(download_dir, exist_ok=True)
 # Set the download directory in the Chrome options
 chrome_options = webdriver.ChromeOptions()

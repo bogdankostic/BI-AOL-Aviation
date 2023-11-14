@@ -3,6 +3,8 @@ import glob
 import pandas as pd
 import pyexasol
 
+from ETL.config import EXASOL_HOST, EXASOL_PORT, EXASOL_USER, EXASOL_PASSWORD
+
 
 MONTH_NAME_TO_NUMBER = {
     "january": 1,
@@ -19,11 +21,6 @@ MONTH_NAME_TO_NUMBER = {
     "december": 12,
 }
 NUMBER_TO_MONTH_NAME = {v: k for k, v in MONTH_NAME_TO_NUMBER.items()}
-
-EXASOL_HOST = "192.168.0.251"
-EXASOL_PORT = "8563"
-EXASOL_USER = "sys"
-EXASOL_PASSWORD = "exasol"
 
 
 def merge_and_update_time(df, time_dim, time_cols, id_col):
@@ -94,7 +91,7 @@ if __name__ == "__main__":
     )
     all_new_times = pd.DataFrame(columns=["TIME_ID", "year", "month", "day", "hour", "minute"])
 
-    for filename in glob.glob("../data/raw/*.csv"):
+    for filename in glob.glob("../data/flights/raw/*.csv"):
         with open(filename) as file:
             print(f"Processing {filename}")
             file.readline()  # Skip the first line
@@ -212,5 +209,5 @@ if __name__ == "__main__":
     all_new_times["minute"] = all_new_times["minute"].map(lambda m: str(m).zfill(2))
 
     # Save data to CSV
-    all_flights.to_csv("data/flights.csv", index=False)
-    all_new_times.to_csv("data/new_times.csv", index=False)
+    all_flights.to_csv("data/flights/flights.csv", index=False)
+    all_new_times.to_csv("data/flights/new_times.csv", index=False)
